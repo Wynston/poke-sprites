@@ -11,16 +11,25 @@ license = "GPL-3.0"
 keywords = ["pokemon", "terminal", "cli"]
 categories = ["command-line-utilities"]
 
+[features]
+default = ["cli"]
+cli = ["dep:clap", "dep:rand", "dep:thiserror", "dep:dirs", "dep:toml"]
+
+[[bin]]
+name = "krabby"
+path = "src/main.rs"
+required-features = ["cli"]
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 # Cli
-clap = { version = "4.5.18", features = ["derive"] }
+clap = { version = "4.5.18", features = ["derive"], optional = true }
 serde = { version = "1.0.210", features = ["derive"]}
 serde_json = "1.0.128"
-rand = "0.8.5"
+rand = { version = "0.8.5", optional = true }
 rust-embed = { version = "8.5.0", features = ["debug-embed"] }
-thiserror = "1.0.64"
+thiserror = { version = "1.0.64", optional = true }
 # Config
-dirs = "5.0.1"
-toml = "0.8.19"
+dirs = { version = "5.0.1", optional = true }
+toml = { version = "0.8.19", optional = true }
